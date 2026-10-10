@@ -2911,6 +2911,8 @@ class GEEHandler(BaseHTTPRequestHandler):
             tile = self._tile(severity if severity is not None else img, {'min': vmin, 'max': vmax, 'palette': pal})
             stats = {f'Mean {idx}': q.get('Mean'), f'Min {idx}': q.get('Min'),
                      f'Max {idx}': q.get('Max'), f'Std {idx}': q.get('Std')}
+            # FIX: define interp BEFORE any augmented assignment.
+            interp = f'{idx} from {source} ({year}).'
             if idx in ('MNDWI', 'AWEI', 'NDWI'):
                 threshold = 0.0
                 stats['Water threshold'] = f'{idx} > {threshold:g} (fixed screening threshold)'
@@ -2920,7 +2922,6 @@ class GEEHandler(BaseHTTPRequestHandler):
             if idx in ('NDBI', 'UI', 'IBI', 'BSI'):
                 stats.update(self._class_areas(img.gt(0.1 if idx != 'BSI' else 0).rename('b'), geom, 10,
                                                {0: 'Other', 1: idx}))
-            interp = f'{idx} from {source} ({year}).'
             if idx == 'DNBR':
                 # Common dNBR severity breaks; intended as screening classes, not field-validated burn severity.
                 stats.update(self._class_areas(severity, geom, 30, {0:'Unburned/low change', 1:'Low', 2:'Moderate-low', 3:'Moderate-high', 4:'High', 5:'Enhanced regrowth'}))
