@@ -1,0 +1,8 @@
+# GeoSpatial Platform Backend — dependencies for server.py (the active bridge)
+earthengine-api>=0.1.384
+google-auth>=2.0.0
+google-auth-oauthlib>=0.4.0
+cryptography>=41.0.0
+python-dotenv>=1.0.0
+# Optional drone grid/point-cloud map reprojection for non-UTM projected CRSs.
+pyproj>=3.6.0

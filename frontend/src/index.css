@@ -1,0 +1,4 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, #root { height: 100%; width: 100%; overflow: hidden; background: #0d47a1; }
+.leaflet-container { height: 100%; width: 100%; z-index: 1; }
+.map-wrapper { height: 100%; width: 100%; position: relative; }
